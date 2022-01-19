@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusablecodes.dart';
-import 'result.dart';
+import 'bmi_brain.dart';
 enum Gender{
 
   male,
   female,
 }
+ String bmi = '0';
+ String getResult = '0';
+ String getInterpretation = '0';
+  //Color(0xFF111328);
 
 class InputPage extends StatefulWidget {
   const InputPage({ Key? key }) : super(key: key);
@@ -16,14 +20,14 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color containercolor = const Color(0xFF1D1E33);
+
+
+ Color containercolor = const Color(0xFF1D1E33);
   Color malecardcolor = const Color(0xFF1D1E33);
   Color femalecardcolor = const Color(0xFF1D1E33);
   int height = 120;
   int weight = 0;
-
   int age = 0;
-  //Color(0xFF111328);
 
   void changecolor(Gender gender){
     if(gender == Gender.male){
@@ -285,7 +289,7 @@ class _InputPageState extends State<InputPage> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  age!= 0 ? weight-- : weight = 0;
+                                  age!= 0 ? age-- : age = 0;
                                 });
                               },
                                                       ),
@@ -328,8 +332,16 @@ class _InputPageState extends State<InputPage> {
             height: 70,
             child: TextButton(
               onPressed: (){
-
+                setState(() {
+                  CalBrain cal = CalBrain(weight,height);
+                  bmi = cal.calculateBmi().toStringAsFixed(1);
+                  int x = cal.calculateBmi().round();
+                  getResult = cal.getResult(x);
+                  getInterpretation = cal.getInterpretation(x);
+                  
+                });
                 Navigator.pushNamed(context, 'result_page');
+                
              }, 
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(bottomcontainercolor,)

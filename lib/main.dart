@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'first_page',
       routes: {
         'first_page': (context) => const InputPage(),
-        'result_page': (context) => const Result(),
+        'result_page': (context) =>  Result(bmi,getResult,getInterpretation),
       },
     );
   }
